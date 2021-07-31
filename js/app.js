@@ -202,3 +202,5 @@ let lima = {
 };
 
 lima.render();
+
+// more when I do lab 07
