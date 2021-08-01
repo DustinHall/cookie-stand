@@ -3,31 +3,34 @@
 
 let hours = ['6 a.m.', '7 a.m.', '8 a.m.', '9 a.m.', '10 a.m.', '11 a.m.', '12 p.m.', '1 p.m.', '2 p.m.', '3 p.m.', '4 p.m.', '5 p.m.', '6 p.m.', '7 p.m.'];
 
-let seattle = {
-  name: 'Seattle',
-  minCust: 23,
-  maxCust: 65,
-  avgSold: 6.3,
-  dailyTotal: 0,
-  avgCookiesSoldEachHourArray: [],
+let storesArray = [];
 
-  getRandomCustomer: function() {
+function Sales(name, minCust, maxCust, avgSold,) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgSold = avgSold; 
+  dailyTotal = 0;
+
+  avgCookiesSoldEachHourArray: [];
+
+  this.getRandomCustomer = function() {
     return Math.floor(Math.random() * (this.maxCust - this.minCust + 1) + this.minCust);
-  },
-  avgCookiesPurchased: function () {
+  }
+  this.avgCookiesPurchased = function() {
     return Math.ceil(this.getRandomCustomer() * this.avgSold);
-  },
+  }
 
-  calcCookiePerHour: function() {
+  this.calcCookiePerHour = function() {
     for (let i = 0; i < hours.length; i++) {
       let custThisHour = this.getRandomCustomer();
       let cookiesSoldThisHour = Math.ceil(custThisHour * this.avgSold);
       this.avgCookiesSoldEachHourArray.push(`${hours[i]}: ${cookiesSoldThisHour} cookies sold`);
       this.dailyTotal = this.dailyTotal + cookiesSoldThisHour;
     }
-  },
-
-  render: function() {
+  }
+  
+  this.render = function() {
     this.calcCookiePerHour();
     let seattleStore = document.getElementById('seattleStore');
     for (let i = 0; i < this.avgCookiesSoldEachHourArray.length; i++) {
@@ -38,10 +41,10 @@ let seattle = {
     let liTotal = document.createElement('li');
     liTotal.textContent = `Total ${(this.dailyTotal)} cookies sold`;
     seattleStore.appendChild(liTotal);
-  },
-};
+  }
+}
 
-seattle.render();
+Sales.render();
 
 let tokyo = {
   name: 'Tokyo',
